@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+  <script
+  src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="./dataSource.js"></script>
+  <script src="./multipleLevelPicker.js"></script>
+</head>
+<body>
+  <input type="text" placeholder="請選擇服務" name="display">
+  <input type="hidden" name="products">
+  <script>
+    const config = {
+      title: '服務類型選單',
+      source: data, 
+      limit: 3,
+    }
+    const productPicker = new MultipleLevelPicker(config);
+    productPicker.on('submit', function (res) {
+      console.log(res);
+      $('[name="display"]').val(res.names.join(', '));
+      $('[name="products"]').val(res.ids.join(', '));
+    });
+  </script>
+</body>
+</html>
