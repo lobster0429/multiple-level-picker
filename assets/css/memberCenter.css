@@ -1,0 +1,179 @@
+.filter-option-inner {
+  padding-right: 0 !important;
+}
+.infoTitle {
+  min-width: 150px;
+}
+.selectWidth {
+  width: 200px;
+  margin-bottom: 0px;
+}
+#count_message,
+#count_message1,
+#count_message2,
+#count_message3,
+#count_message4 {
+  position: absolute;
+  right: 6px;
+  bottom: 6px;
+  background: #eee;
+  padding: 0px 5px;
+  border-radius: 4px;
+}
+
+.moveOperating {
+  position: relative;
+}
+.addProduct {
+  padding-top: 0.35714rem;
+  padding-bottom: 0.35714rem;
+  background-color: #1ea555 !important;
+  text-decoration: none;
+  transition: all 0.2s;
+  border-radius: 3px;
+  position: relative !important;
+}
+.operating_list,
+.addProduct_list {
+  position: absolute;
+  z-index: 2;
+  width: calc(50% - 6px);
+  top: 100%;
+  right: 0;
+  background-color: #fff;
+  color: #5a5a5a;
+  border: 1px solid #eee;
+}
+.addProduct_list {
+  width: 100%;
+}
+.operating_list > a > div,
+.addProduct_list > a > div {
+  padding: 5px 10px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+}
+
+.notice {
+  position: relative;
+}
+.notice_tab {
+  padding: 5px 0 5px 0;
+}
+
+.notice_tab.active {
+  border-bottom: #1ea555 1px solid;
+}
+
+.notice_list,
+.notice_setting_list {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  z-index: 2;
+  background-color: #fff;
+}
+.notice_list {
+  min-width: 300px;
+  box-shadow: 2px 4px 9px #e4e4e4;
+  -webkit-box-shadow: 2px 4px 9px #e4e4e4;
+  -moz-box-shadow: 2px 4px 9px #e4e4e4;
+}
+.notice_list_item {
+  display: flex;
+  align-items: center;
+  border-bottom: #eee 1px solid;
+}
+.notice_list_item:last-child {
+  border-bottom: none;
+}
+
+.notice_setting {
+  position: relative;
+  padding-right: 10px;
+  color: #1ea555;
+}
+.notice_setting_list {
+  border: 1px solid #eee;
+  padding: 3px 15px;
+  min-width: 90px;
+}
+.notice_setting_list > div {
+  padding: 5px 0;
+  border-bottom: 1px solid #eee;
+}
+.notice_setting_list > div:last-child {
+  border-bottom: none;
+}
+
+.license_area,
+.awarded_area {
+  display: flex;
+  flex-wrap: wrap;
+  width: 450px;
+  border: 1px solid #eee;
+  padding: 20px;
+}
+.license_area > div,
+.awarded_area > div {
+  display: flex;
+  width: 100%;
+}
+.license_area > div div,
+.awarded_area > div div {
+  flex: 1;
+}
+/*圖片上傳start*/
+.image-preview-input {
+  position: relative;
+  overflow: hidden;
+  margin: 0px;
+  color: #333;
+  background-color: #fff;
+  border-color: #ccc;
+}
+.image-preview-input input[type="file"] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+  cursor: pointer;
+  opacity: 0;
+  filter: alpha(opacity=0);
+}
+.image-preview-input-title {
+  margin-left: 2px;
+}
+#dynamic {
+  width: 100%;
+}
+.js-fancybox {
+  cursor: pointer;
+}
+/*圖片上傳CSS end*/
+@media screen and (max-width: 1200px) {
+  .selectWidth {
+    width: 240px;
+    margin-bottom: 10px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .infoTitle {
+    min-width: 140px;
+  }
+  .selectWidth {
+    width: 165px;
+  }
+  .license_area,
+  .awarded_area {
+    width: 100%;
+  }
+}
+@media screen and (max-width: 576px) {
+  .notice_list {
+    min-width: 250px;
+  }
+}
