@@ -10,6 +10,10 @@
   padding: 0;
   list-style: none;
 }
+.mlp-header {
+  overflow: hidden;
+  padding-bottom: .3em;
+}
 .mlp-title {
   float: left;
 }
@@ -17,14 +21,18 @@
   float: right;
 }
 .mlp-selector {
-  clear: both;
-  list-style: none;
   max-height: 300px;
   overflow: auto;
+  background: linear-gradient(white 30%, rgba(255,255,255,0)), linear-gradient(rgba(255,255,255,0), white 70%) 0 100%, radial-gradient(50% 0, farthest-side, rgba(0,0,0,.1), rgba(0,0,0,0)), radial-gradient(50% 100%,farthest-side, rgba(0,0,0,.1), rgba(0,0,0,0)) 0 100%;
+	background: linear-gradient(white 30%, rgba(255,255,255,0)), linear-gradient(rgba(255,255,255,0), white 70%) 0 100%, radial-gradient(farthest-side at 50% 0, rgba(0,0,0,.1), rgba(0,0,0,0)), radial-gradient(farthest-side at 50% 100%, rgba(0,0,0,.1), rgba(0,0,0,0)) 0 100%;
+	background-repeat: no-repeat;
+	background-color: white;
+	background-size: 100% 30px, 100% 30px, 100% 10px, 100% 10px;
+  background-attachment: local, local, scroll, scroll;
 }
+
 li.mlp-itm {
   overflow: hidden;
-  padding: 0 0 0 .5em;
 }
 
 .mlp-container.__active {
@@ -43,11 +51,6 @@ li.mlp-itm {
 
 ul.mlp-level {
   clear: both;
-  background: #FFF;
-  margin-left: 1.3em;
-}
-ul.mlp-level[data-level="1"] {
-  margin-left: -.8em;
 }
 
 .mlp-level input[type="checkbox"] + .u-check-icon-checkbox-v4 {
@@ -61,10 +64,22 @@ ul.mlp-level[data-level="1"] {
 .mlp-single{
   display: flex;
   overflow: hidden;
-  padding: .5em 0 .5em .5em;
+  padding: .5em 0 .5em;
 }
 .mlp-single:hover {
   background: rgba(0, 0, 0, .05);
+}
+.mlp-container[data-level="2"] .mlp-single {
+  padding-left: .3em;
+}
+.mlp-container[data-level="3"] .mlp-single {
+  padding-left: 1.5em;
+}
+.mlp-container:not([data-level="1"]) .mlp-single::before {
+  content: '∟';
+  transform: scale(.7) translateY(-2px);
+  color: #AAA;
+  margin-right: .2em;
 }
 
 .mlp-dive {
@@ -82,7 +97,16 @@ ul.mlp-level[data-level="1"] {
 }
 .mlp-label {
   display: block;
-  padding-left: 25px;
   margin-bottom: 0;
   flex: 4 4 auto;
+}
+.mlp-label.__accept {
+  padding-left: 25px;
+}
+.mlp-footer {
+  margin-top: .8em;
+  text-align: center;
+}
+.mlp-footer button{
+  margin: .3em;
 }

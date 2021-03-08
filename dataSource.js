@@ -26,7 +26,27 @@ const data = [
             id: '411400',
             name: '冷氣清洗',
             children: null,
-          }
+          },
+          {
+            id: '411500',
+            name: '洗衣機清洗',
+            children: null,
+          },
+          {
+            id: '411600',
+            name: '水塔清洗',
+            children: null,
+          },
+          {
+            id: '411700',
+            name: '窗簾清潔',
+            children: null,
+          },
+          {
+            id: '411800',
+            name: '床墊清潔冷氣清洗',
+            children: null,
+          },
         ]
       },
       {
@@ -41,6 +61,33 @@ const data = [
           {
             id: '412200',
             name: '大型廢棄物回收',
+            children: null,
+          },
+          {
+            id: '412100',
+            name: '其他回收服務',
+            children: null,
+          },
+          
+        ]
+      },
+      {
+        id: '413000',
+        name: '家事服務',
+        children: [
+          {
+            id: '413100',
+            name: '煮飯',
+            children: null,
+          },
+          {
+            id: '413200',
+            name: '收納管理',
+            children: null,
+          },
+          {
+            id: '413300',
+            name: '老人照護',
             children: null,
           },
         ]

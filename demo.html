@@ -72,6 +72,11 @@
       //acceptLevel: 3,
     }
     const productPicker = new MultipleLevelPicker(config);
+
+    $('[name="display"]').on('click', function () {
+      productPicker.show()
+    });
+
     productPicker.on('submit', function (res) {
       console.log(res);
       const names = res.map(r => r.name),
