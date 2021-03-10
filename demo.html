@@ -3,6 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- CSS Global Compulsory -->
   <link rel="stylesheet" href="./assets/vendor/bootstrap/bootstrap.min.css" />
 
@@ -30,6 +31,7 @@
 
 </head>
 <body>
+  <input type="file" id="upload-xlsx">
   <input type="text" placeholder="請選擇服務" name="display" style="width: 250px; margi-bottom: 10px;">
   <input type="hidden" name="products">
   <!-- JS Global Compulsory -->
@@ -58,17 +60,28 @@
   <script src="./assets/js/components/hs.go-to.js"></script>
   <script src="./assets/js/components/hs.popup.js"></script>
   <script src="./assets/js/components/hs.tabs.js"></script>
+  
+  <!-- Read data from xlsx file -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/jszip.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/xlsx.js"></script>
+  <script src="./dataFromXlsx.js"></script>
 
+  <!-- Multiple level picker -->
+  <link href="./multiple-level-picker.css" rel="stylesheet" />
   <script src="./dataSource.js"></script>
   <script src="./multipleLevelPicker.js"></script>
-  <link href="./multiple-level-picker.css" rel="stylesheet" />
-
   <script>
     const config = {
-      id: 'picker',
+      prefix: 'service',
+      width: '90%',
+      maxWidth: '350px',
+      selectorMaxHeight: '400px', 
       title: '服務類型選單',
       source: data, 
-      limit: 5,
+      limit: 4,
+      mode: 'tree',
+      selectedValue: ['411500', '411600', '420000', '412000', '411400', '412000'],
+      //mode: 'folder',
       //acceptLevel: 3,
     }
     const productPicker = new MultipleLevelPicker(config);

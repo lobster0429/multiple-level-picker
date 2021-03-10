@@ -10,7 +10,19 @@ const data = [
           {
             id: '411100',
             name: '居家清潔',
-            children: null,
+            children: [
+              {
+                id: '411110',
+                name: '第四層',
+                children: [
+                  {
+                    id: '411111',
+                    name: '第五層',
+                    children: null,
+                  }
+                ]
+              }
+            ],
           },
           {
             id: '411200',
