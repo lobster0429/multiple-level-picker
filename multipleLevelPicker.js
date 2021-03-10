@@ -51,7 +51,6 @@ class MultipleLevelPicker {
   }
   
   checkboxAction(evt) {
-    console.log('change');
     const $this = $(evt.currentTarget),
           checked = $this.prop('checked'),
           id = $this.val(), 
@@ -65,7 +64,6 @@ class MultipleLevelPicker {
           $children.prop('checked', true).prop('disabled', true);
           let keep = [];
           this.selected.forEach((s, i) => {
-            console.log(JSON.stringify(this.selected));
             if (this.$root.find(`[data-belong="${id}"] input[value="${s.id}"]`).length == 0) { keep.push(s); }
           });
           this.selected = keep;
@@ -105,7 +103,6 @@ class MultipleLevelPicker {
   }
 
   backwardAction(evt) {
-    console.log('aa');
     const $this = $(evt.currentTarget),
           pos = {level: $this.data('level'), name: $this.data('name'), id: $this.data('id')}; 
     
