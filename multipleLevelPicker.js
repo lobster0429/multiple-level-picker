@@ -26,7 +26,7 @@ class MultipleLevelPicker {
   }
 
   render () {
-    this.$outer = $(`<div class="multiple-level-picker-container" id="${this.config.prefix}-multiple-level-picker" style="display: none; height: ${$(document).height()}px">`);
+    this.$outer = $(`<div class="multiple-level-picker-container" id="${this.config.prefix}-multiple-level-picker">`);
     this.$root = $(`<div class="multiple-level-picker" style="width: ${this.config.width}; max-width: ${this.config.maxWidth};">`)
     if (this.config.mode == 'folder') {
       this.$root.addClass('mlp-mode__folder');

@@ -70,6 +70,7 @@
   <link href="./multiple-level-picker.css" rel="stylesheet" />
   <script src="./dataSource.js"></script>
   <script src="./multipleLevelPicker.js"></script>
+  <div class="json"></div>
   <script>
     const config = {
       prefix: 'service',
@@ -78,9 +79,8 @@
       selectorMaxHeight: '400px', 
       title: '服務類型選單',
       source: data, 
-      limit: 4,
+      limit: 5,
       mode: 'tree',
-      selectedValue: ['411500', '411600', '420000', '412000', '411400', '412000'],
       //mode: 'folder',
       //acceptLevel: 3,
     }
@@ -97,6 +97,18 @@
       $('[name="display"]').val(names.join(', '));
       $('[name="products"]').val(ids.join(', '));
     });
+
+   const $upload = document.getElementById('upload-xlsx');
+   $upload.addEventListener('change', function (evt) {
+     filePicked(evt)
+       .then(res => {
+          const data = dataParser(res);
+          $('.json').text(JSON.stringify(data.slice(0, 5)));
+       })
+       .catch(err => {
+         console.log(err);
+       })
+   });
   </script>
 </body>
 </html>

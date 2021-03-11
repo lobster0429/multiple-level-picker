@@ -1,13 +1,25 @@
 .multiple-level-picker-container {
   display: flex;
   position: fixed;
-  z-index: 99;
   width: 100vw;
+  height: 100vh;
   justify-content: center;
   align-items: center;
+
+  z-index: -99;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: all .3s ease-out;
 }
 
-.multiple-level-picker-container.__active .multiple-level-picker{
+
+
+.multiple-level-picker-container.__active {
+  z-index: 99;
+  pointer-events: unset;
+  opacity: 1;
+  transform: translateY(0);
    
 }
 .multiple-level-picker {
