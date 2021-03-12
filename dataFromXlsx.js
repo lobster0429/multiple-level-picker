@@ -1,3 +1,15 @@
+const $upload = document.getElementById('upload-xlsx');
+$upload.addEventListener('change', function (evt) {
+ filePicked(evt)
+   .then(res => {
+      const data = dataParser(res);
+      $('#data-output').text(JSON.stringify(data.slice(0, 5)));
+   })
+   .catch(err => {
+     console.log(err);
+   })
+});
+
 function filePicked(evt) {
   var file = evt.target.files[0];
   var reader = new FileReader();

@@ -70,7 +70,7 @@
   <link href="./multiple-level-picker.css" rel="stylesheet" />
   <script src="./dataSource.js"></script>
   <script src="./multipleLevelPicker.js"></script>
-  <div class="json"></div>
+  <div id="data-output"></div>
   <script>
     const config = {
       prefix: 'service',
@@ -98,17 +98,7 @@
       $('[name="products"]').val(ids.join(', '));
     });
 
-   const $upload = document.getElementById('upload-xlsx');
-   $upload.addEventListener('change', function (evt) {
-     filePicked(evt)
-       .then(res => {
-          const data = dataParser(res);
-          $('.json').text(JSON.stringify(data.slice(0, 5)));
-       })
-       .catch(err => {
-         console.log(err);
-       })
-   });
+   
   </script>
 </body>
 </html>
