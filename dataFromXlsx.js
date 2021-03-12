@@ -2,7 +2,7 @@ const $upload = document.getElementById('upload-xlsx');
 $upload.addEventListener('change', function (evt) {
  filePicked(evt)
    .then(res => {
-      const data = dataParser(res);
+      const data = dataParserV2(res);
       $('#data-output').text(JSON.stringify(data.slice(0, 5)));
    })
    .catch(err => {
@@ -35,7 +35,6 @@ function filePicked(evt) {
     reader.readAsBinaryString(file);
   });
 }
-
 
 function dataParser (json) {
   let result = [];
@@ -81,4 +80,54 @@ function dataParser (json) {
     }
   });
   return result;
+}
+
+
+function dataParserV2 (json) {
+  const pre = 4;
+  const bite = [1, 2, 2, 2, 2];
+  let result = (() => {
+    let arr = [];
+    for (let i = 0; i < bite.length; i++) {
+      arr.push([]);
+    }
+    return arr;
+  })();
+  console.log(result);
+  let cur;
+
+  json.forEach(o => {
+    const idConstructor = [o['分層2'], o['分層3'], o['分層4'], o['分層5'], o['分層6']];
+    const pos = (idConstructor.indexOf('0') == -1)?5:idConstructor.indexOf('0');
+    const unit = {
+      id: supplement(),
+      name: o['項目名稱_中文'],
+    }
+    if (pos == 1) {
+      result[pos-1].push(unit); 
+    }else if (pos <= 4) {
+      const i = parseInt(idConstructor[pos-2]-1);
+      if (!$.isArray(result[pos-1][i])) {
+        result[pos-1][i] = [];
+      }
+      result[pos-1][i].push(unit); 
+    }
+
+    function supplement() {
+      idConstructor.forEach((d, i) => {
+        const diff = bite[i] - d.length;
+        let r = d;
+        if (diff > 0) {
+          for(let i = 0; i < diff; i++) {
+            r = '0' + r;
+          } 
+          idConstructor[i] = r;
+        } 
+      });  
+      return pre + idConstructor.join('');
+    }
+  });
+  console.log(result);
+  return result;
+
 }
