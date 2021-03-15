@@ -248,3 +248,30 @@ class MultipleLevelPicker {
     } 
   }
 }
+
+const config = {
+  prefix: 'service',
+  width: '90%',
+  maxWidth: '350px',
+  selectorMaxHeight: '400px', 
+  title: '服務類型選單',
+  source: data, 
+  limit: 5,
+  mode: 'tree',
+  rootData: datav2['4000000000'],
+  //mode: 'folder',
+  //acceptLevel: 3,
+}
+const productPicker = new MultipleLevelPicker(config);
+
+$('[name="display"]').on('click', function () {
+  productPicker.show()
+});
+
+productPicker.on('submit', function (res) {
+  console.log(res);
+  const names = res.map(r => r.name),
+        ids = res.map(r =>  r.id);
+  $('[name="display"]').val(names.join(', '));
+  $('[name="products"]').val(ids.join(', '));
+});

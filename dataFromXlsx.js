@@ -3,7 +3,7 @@ $upload.addEventListener('change', function (evt) {
  filePicked(evt)
    .then(res => {
       const data = dataParserV2(res);
-      $('#data-output').text(JSON.stringify(data.slice(0, 5)));
+      $('#data-output').text(JSON.stringify(data));
    })
    .catch(err => {
      console.log(err);
@@ -86,46 +86,50 @@ function dataParser (json) {
 function dataParserV2 (json) {
   const pre = 4;
   const bite = [1, 2, 2, 2, 2];
-  let result = (() => {
-    let arr = [];
-    for (let i = 0; i < bite.length; i++) {
-      arr.push([]);
-    }
-    return arr;
-  })();
-  console.log(result);
+  const len = bite.map((acc ,c) => {return acc + c});
+  let result = {};
   let cur;
 
   json.forEach(o => {
     const idConstructor = [o['分層2'], o['分層3'], o['分層4'], o['分層5'], o['分層6']];
-    const pos = (idConstructor.indexOf('0') == -1)?5:idConstructor.indexOf('0');
+    idConstructor.forEach((d, i) => {
+      const diff = bite[i] - d.length;
+      let r = d;
+      if (diff > 0) {
+        for(let i = 0; i < diff; i++) {
+          r = '0' + r;
+        } 
+        idConstructor[i] = r;
+      } 
+    });
+
+    const pos = (idConstructor.indexOf('00') == -1)?5:idConstructor.indexOf('00');
     const unit = {
-      id: supplement(),
+      id: pre + idConstructor.join(''),
       name: o['項目名稱_中文'],
     }
-    if (pos == 1) {
-      result[pos-1].push(unit); 
-    }else if (pos <= 4) {
-      const i = parseInt(idConstructor[pos-2]-1);
-      if (!$.isArray(result[pos-1][i])) {
-        result[pos-1][i] = [];
+    const index = findIndex();
+    result[index] = (!result[index])
+      ? {level: pos, data: []}
+      : result[index];
+    result[index].data.push(unit);
+    
+    function findIndex() {
+      let f = ['0', '00', '00', '00', '00'];
+      if (pos > 1) {
+        for(let w = 0; w < pos-1; w++) {
+          f[w] = idConstructor[w]; 
+        }
       }
-      result[pos-1][i].push(unit); 
+      return pre + f.join('');
     }
+  });
 
-    function supplement() {
-      idConstructor.forEach((d, i) => {
-        const diff = bite[i] - d.length;
-        let r = d;
-        if (diff > 0) {
-          for(let i = 0; i < diff; i++) {
-            r = '0' + r;
-          } 
-          idConstructor[i] = r;
-        } 
-      });  
-      return pre + idConstructor.join('');
-    }
+  Object.keys(result).forEach(k => {
+    const itm = result[k];
+    itm.data.forEach(a => {
+      a.children = result.hasOwnProperty(a.id);
+    });
   });
   console.log(result);
   return result;

@@ -67,39 +67,26 @@
   <script src="./dataFromXlsx.js"></script>
 
   <!-- Multiple level picker -->
+  <!--
   <link href="./multiple-level-picker.css" rel="stylesheet" />
   <script src="./dataSource.js"></script>
-  <script src="./dataSource.v2.js"></script>
   <script src="./multipleLevelPicker.js"></script>
+  -->
+  <link href="./multiple-level-picker.v2.css" rel="stylesheet" />
+  <script src="./dataSource.v2.js"></script>
   <script src="./multipleLevelPicker.v2.js"></script>
   <div id="data-output"></div>
   <script>
+  $(document).on('ready', () => {
     const config = {
       prefix: 'service',
-      width: '90%',
-      maxWidth: '350px',
-      selectorMaxHeight: '400px', 
-      title: '服務類型選單',
-      source: data, 
       limit: 5,
-      mode: 'tree',
-      //mode: 'folder',
-      //acceptLevel: 3,
+      title: '服務類型選單',
+      rootData: datav2['4000000000'],
+      //selectLowest: true,
     }
-    const productPicker = new MultipleLevelPicker(config);
-
-    $('[name="display"]').on('click', function () {
-      productPicker.show()
-    });
-
-    productPicker.on('submit', function (res) {
-      console.log(res);
-      const names = res.map(r => r.name),
-            ids = res.map(r =>  r.id);
-      $('[name="display"]').val(names.join(', '));
-      $('[name="products"]').val(ids.join(', '));
-    });
-   
+    const pickerv2 = new MultipleLevelPickerV2(config);
+  })
   </script>
 </body>
 </html>
