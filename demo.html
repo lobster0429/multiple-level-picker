@@ -32,7 +32,7 @@
 </head>
 <body>
   <input type="file" id="upload-xlsx">
-  <input type="text" placeholder="請選擇服務" name="display" style="width: 250px; margi-bottom: 10px;">
+  <input type="text" placeholder="請選擇服務" name="display" style="width: 250px;">
   <input type="hidden" name="products">
   <!-- JS Global Compulsory -->
   <script src="./assets/vendor/jquery/jquery.min.js"></script>
@@ -79,13 +79,38 @@
   <script>
   $(document).on('ready', () => {
     const config = {
-      prefix: 'service',
+      prefix: 'industries',
       limit: 5,
       title: '服務類型選單',
-      rootData: datav2['4000000000'],
-      //selectLowest: true,
+      source: 'http://test.iwowpao.com/api/industryclass.php',
+      selectLowest: true,
+      /*
+      chosen: {
+        '010300000000': '動物飼料',
+        '010101000000': '農用溫室',
+        '020102000000': '親子裝',
+        '010102020000': '其他水產養殖設備',
+        '060100000000': '欄杆與扶手',
+        '060501000000': '天花板網格組件',
+        '060502000000': '天花板',
+      },
+      */
     }
     const pickerv2 = new MultipleLevelPickerV2(config);
+    pickerv2.on('submit', res => {
+      const texts = [], ids = [];
+      $.each(res, (i, r) => {
+        ids.push(i);
+        texts.push(r); 
+      });
+      $('[name="display"]').val(texts.join(', '));
+      $('[name="products"]').val(ids.join(', '));
+      pickerv2.hide();
+    })
+
+    $('[name="display"]').on('click', evt => {
+      pickerv2.show();
+    });
   })
   </script>
 </body>

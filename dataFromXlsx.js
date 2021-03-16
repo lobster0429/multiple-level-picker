@@ -105,7 +105,7 @@ function dataParserV2 (json) {
 
     const pos = (idConstructor.indexOf('00') == -1)?5:idConstructor.indexOf('00');
     const unit = {
-      id: pre + idConstructor.join(''),
+      code: pre + idConstructor.join(''),
       name: o['項目名稱_中文'],
     }
     const index = findIndex();
