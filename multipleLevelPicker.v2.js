@@ -133,6 +133,7 @@ class MultipleLevelPickerV2 {
       self.$root.find('.mlp-count').text(self.chosenLen());
       self.$root.find(`[value="${i}"]`).prop('checked', checked);
       self.$record.scrollLeft(9999);
+      self.trigger('update', self.chosen.data);
     }
   }
   
@@ -269,7 +270,7 @@ class MultipleLevelPickerV2 {
   on (a, cb) {
     this.callbacks = {
       submit: [],
-      change: [],
+      update: [],
     }
     if (this.callbacks.hasOwnProperty(a) && typeof cb == 'function') {
       this.callbacks[a].push(cb);

@@ -111,6 +111,9 @@
     $('[name="display"]').on('click', evt => {
       pickerv2.show();
     });
+    pickerv2.on('update', res => {
+      console.log(res);
+    });
   })
   </script>
 </body>
