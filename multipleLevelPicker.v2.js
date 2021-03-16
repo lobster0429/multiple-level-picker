@@ -3,6 +3,8 @@ class MultipleLevelPicker {
     const defaultConfig  = {
       prefix: '',
       title: '',
+      limitText: '',
+      rootTab: '',
       limit: 1,
       source: null,
       selectLowest: false,
@@ -37,7 +39,7 @@ class MultipleLevelPicker {
     $.each(this.basic, (p, fn) => fn());
 
     this.$layers = [];
-    this.layer(this.rootData, '全部分類', false, false);
+    this.layer(this.rootData, this.config.rootTab, false, false);
     this.$root.appendTo(this.$outer);
     this.$outer.appendTo($('body'));
     Object.keys(this.config.chosen).forEach((k, i) => {
@@ -141,7 +143,7 @@ class MultipleLevelPicker {
     header: () => {
       const $header = $(`<div class="mlp-header">`);
       const $title = $(`<strong class="mlp-title">${this.config.title}</string>`)
-      this.$limit = $(`<div class="mlp-limit">已選擇：<span class="mlp-count">${this.chosenLen()}</span>/${this.limit}</div>`);
+      this.$limit = $(`<div class="mlp-limit">${this.config.limitText}<span class="mlp-count">${this.chosenLen()}</span>/${this.limit}</div>`);
       $title.appendTo($header);
       this.$limit.appendTo($header);
       $header.appendTo(this.$root);
