@@ -96,7 +96,7 @@
       },
       */
     }
-    const pickerv2 = new MultipleLevelPickerV2(config);
+    const pickerv2 = new MultipleLevelPicker(config);
     pickerv2.on('submit', res => {
       const texts = [], ids = [];
       $.each(res, (i, r) => {

@@ -1,4 +1,4 @@
-class MultipleLevelPickerV2 {
+class MultipleLevelPicker {
   constructor(config) {
     const defaultConfig  = {
       prefix: '',
