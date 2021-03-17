@@ -33,6 +33,16 @@ const picker = new MultipleLevelPicker(config);
 | title | String |  | 設定選單標題文字 |
 | limitText | String |  | 設定已選擇顯示文字 |
 | rootTab | String | / | 設定最上層頁籤顯示文字 |
-|  chosen | Object | {} | 設定預設已選項目<br/>範例格式 {'010300000000': '動物飼料','010101000000': '農用溫室','020102000000': '親子裝'} |
+| chosen | Object | {} | 設定預設已選項目|
+
+** chosen 的格式範例 **
+```javascript
+const obj ={
+  '010300000000': '動物飼料',
+  '010101000000': '農用溫室',
+  '020102000000': '親子裝'
+};
+ ```
+```
 
 
