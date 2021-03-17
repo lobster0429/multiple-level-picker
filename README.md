@@ -44,4 +44,17 @@ const obj ={
 };
 ```
 
+# Callbacks
+此套件目前提供以下回傳，使用範例與回傳時機說明如下：
+
+```javascript
+picker.on('submit' res => {console.log(res)});
+```
+
+| 名稱 | 作用時機 | 回傳資料 |
+| --- | --- | --- |
+| change | 當資料異動時 | 當前選擇的資料 |
+| submit | 當按下送出按鍵時 | 將回傳當前選擇的資料 |
+
+
 
