@@ -2,15 +2,18 @@ class MultipleLevelPicker {
   constructor(config) {
     const defaultConfig  = {
       prefix: '',
-      title: '',
-      limitText: '',
-      rootTab: '',
       limit: 1,
       source: null,
       selectLowest: false,
       lang: '1',
-      selectedValue: [],
       chosen: {},
+      text: {
+        title: 'Menu',
+        count: 'Selected：',
+        rootTab: 'All',
+        cancelBtn: 'Cancel',
+        submitBtn : 'Submit'
+      }
     }
 
     this.config = $.extend({}, defaultConfig, config);
@@ -39,7 +42,7 @@ class MultipleLevelPicker {
     $.each(this.basic, (p, fn) => fn());
 
     this.$layers = [];
-    this.layer(this.rootData, this.config.rootTab, false, false);
+    this.layer(this.rootData, this.config.text.rootTab, false, false);
     this.$root.appendTo(this.$outer);
     this.$outer.appendTo($('body'));
     Object.keys(this.config.chosen).forEach((k, i) => {
@@ -142,8 +145,8 @@ class MultipleLevelPicker {
   basic = {
     header: () => {
       const $header = $(`<div class="mlp-header">`);
-      const $title = $(`<strong class="mlp-title">${this.config.title}</string>`)
-      this.$limit = $(`<div class="mlp-limit">${this.config.limitText}<span class="mlp-count">${this.chosenLen()}</span>/${this.limit}</div>`);
+      const $title = $(`<strong class="mlp-title">${this.config.text.title}</string>`)
+      this.$limit = $(`<div class="mlp-limit">${this.config.text.count}<span class="mlp-count">${this.chosenLen()}</span>/${this.limit}</div>`);
       $title.appendTo($header);
       this.$limit.appendTo($header);
       $header.appendTo(this.$root);
@@ -164,8 +167,8 @@ class MultipleLevelPicker {
     },
     footer: () => {
       const $footer = $(`<div class="mlp-footer">`)
-      this.$cancel = $(`<button type="button" class="mlp-cancel btn btn-secondary">取消</button>`);
-      this.$submit = $(`<button type="button" class="mlp-submit btn btn-primary">確認送出</button>`);
+      this.$cancel = $(`<button type="button" class="mlp-cancel btn btn-secondary">${this.config.text.cancelBtn}</button>`);
+      this.$submit = $(`<button type="button" class="mlp-submit btn btn-primary">${this.config.text.submitBtn}</button>`);
       this.$cancel.appendTo($footer);
       this.$submit.appendTo($footer);
       $footer.appendTo(this.$root);

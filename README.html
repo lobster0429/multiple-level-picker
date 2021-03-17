@@ -1,0 +1,165 @@
+<html>
+      <head>
+        <meta charset="UTF-8">
+        <title>README.md</title>
+      </head>
+      <body>
+        <h1 id="-">版本</h1>
+<p>當前版本為 v2，後續描述皆以此版本為主</p>
+<h1 id="-">安裝方式</h1>
+<p>分為兩個主要檔案，一支 css 以及一支 js</p>
+<pre><code class="lang-html">  &lt;link href=&quot;${your_path}/multiple-level-picker.v2.css&quot; rel=&quot;stylesheet&quot; /&gt;
+  &lt;script src=&quot;${your_path}/multipleLevelPicker.v2.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+<h1 id="-">使用方式</h1>
+<pre><code class="lang-javascript">const config = {
+  source: &#39;http://test.iwowpao.com/api/industryclass.php&#39;,
+  prefix: &#39;industry&#39;,
+  limit: 3,
+  title: &#39;產品類型選單&#39;,
+  rootTab: &#39;全部產品&#39;,
+  limitText: &#39;已選擇：&#39;,
+}
+const picker = new MultipleLevelPicker(config);
+</code></pre>
+<p>此範例資料來源為 industry api ，source 為必要設定
+以下為所有設定</p>
+<h1 id="-">設定</h1>
+<table>
+<thead>
+<tr>
+<th>名稱</th>
+<th>資料類型</th>
+<th>預設值</th>
+<th>功能說明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>prefix</td>
+<td>String</td>
+<td></td>
+<td>用於指定此選單內指定 id 屬性的前綴</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>Number</td>
+<td>1</td>
+<td>限制選單可選取數量</td>
+</tr>
+<tr>
+<td>source</td>
+<td>String</td>
+<td>null</td>
+<td>指定選單的資料來源 api，必填</td>
+</tr>
+<tr>
+<td>selectLowest</td>
+<td>Boolean</td>
+<td>false</td>
+<td>設定是否僅能選擇最底層的選項</td>
+</tr>
+<tr>
+<td>lang</td>
+<td>String</td>
+<td>1</td>
+<td>指定 api 拉取資料語言</td>
+</tr>
+<tr>
+<td>text</td>
+<td>Object</td>
+<td></td>
+<td>設定顯示文字，細節設定見 text 表格</td>
+</tr>
+<tr>
+<td>chosen</td>
+<td>Object</td>
+<td>{}</td>
+<td>設定預設已選項目，格式範例見下</td>
+</tr>
+</tbody>
+</table>
+<h2 id="text-">text 設定範例與內容</h2>
+<pre><code class="lang-javascript">const text = {
+  title: &#39;產品選單&#39;,
+  submitBtn: &#39;確認送出&#39;,
+  canelBtn: &#39;取消&#39;,
+}
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>名稱</th>
+<th>資料類型</th>
+<th>預設值</th>
+<th>欄位說明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>title</td>
+<td>String</td>
+<td>Menu</td>
+<td>選單標題</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>String</td>
+<td>Selected</td>
+<td>已選提示顯示</td>
+</tr>
+<tr>
+<td>rootTab</td>
+<td>String</td>
+<td>All</td>
+<td>跟目錄頁籤文字</td>
+</tr>
+<tr>
+<td>submitBtn</td>
+<td>String</td>
+<td>Submit</td>
+<td>送出按鈕文字</td>
+</tr>
+<tr>
+<td>cancelBtn</td>
+<td>String</td>
+<td>Cancel</td>
+<td>取消按鈕文字</td>
+</tr>
+</tbody>
+</table>
+<h2 id="chosen-">chosen 格式範例</h2>
+<pre><code class="lang-javascript">const obj ={
+  &#39;010300000000&#39;: &#39;動物飼料&#39;,
+  &#39;010101000000&#39;: &#39;農用溫室&#39;,
+  &#39;020102000000&#39;: &#39;親子裝&#39;
+};
+</code></pre>
+<h1 id="callbacks">Callbacks</h1>
+<p>此套件目前提供以下回傳，使用範例與回傳時機說明如下：</p>
+<pre><code class="lang-javascript">picker.on(&#39;submit&#39;, (res) =&gt; {console.log(res)});
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>名稱</th>
+<th>作用時機</th>
+<th>回傳資料</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>change</td>
+<td>當資料異動時</td>
+<td>當前選擇的資料</td>
+</tr>
+<tr>
+<td>submit</td>
+<td>當按下送出按鍵時</td>
+<td>將回傳當前選擇的資料</td>
+</tr>
+</tbody>
+</table>
+
+      </body>
+    </html>
