@@ -21,14 +21,17 @@ class MultipleLevelPicker {
     this.limit = this.config.limit;
     this.path = [];
     this.selectedValue = this.config.selectedValue;
-    
+    this.callbacks = {
+      submit: [],
+      update: [],
+    }   
+
     if (!this.config.source) return false;
     this.get('000000000000')
       .then(res => {
         this.rootData = res;
         this.init();
       })
-    
   }
   
   init () {
@@ -68,8 +71,9 @@ class MultipleLevelPicker {
             from = evt.currentTarget.dataset.from;
       this.get(f)
         .then(res => {
-          const checked = this.$root.find(`[value="${f}"]`).prop('checked');
-          this.layer(res, from, checked, true);
+          const $p = this.$root.find(`[value="${f}"]`);
+          const state = ($p.prop('checked') || $p.prop('disabled'));
+          this.layer(res, from, state, true);
         })
     },
     jump: (evt) => {
@@ -273,10 +277,7 @@ class MultipleLevelPicker {
   }
   
   on (a, cb) {
-    this.callbacks = {
-      submit: [],
-      update: [],
-    }
+    
     if (this.callbacks.hasOwnProperty(a) && typeof cb == 'function') {
       this.callbacks[a].push(cb);
     }

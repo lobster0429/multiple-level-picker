@@ -82,7 +82,7 @@
       prefix: 'industries',
       limit: 5,
       source: 'http://test.iwowpao.com/api/industryclass.php',
-      selectLowest: true,
+      //selectLowest: true,
       lang: '1',
       text: {
         count: '已選擇：',
@@ -103,7 +103,7 @@
       },
       */
     }
-    const pickerv2 = new MultipleLevelPicker(config);
+    window.pickerv2 = new MultipleLevelPicker(config);
     pickerv2.on('submit', res => {
       const texts = [], ids = [];
       $.each(res, (i, r) => {
@@ -114,7 +114,6 @@
       $('[name="products"]').val(ids.join(', '));
       pickerv2.hide();
     })
-
     $('[name="display"]').on('click', evt => {
       pickerv2.show();
     });
