@@ -35,14 +35,13 @@ const picker = new MultipleLevelPicker(config);
 | rootTab | String | / | 設定最上層頁籤顯示文字 |
 | chosen | Object | {} | 設定預設已選項目|
 
-** chosen 的格式範例 **
+**chosen** 格式範例 
 ```javascript
 const obj ={
   '010300000000': '動物飼料',
   '010101000000': '農用溫室',
   '020102000000': '親子裝'
 };
- ```
 ```
 
 
