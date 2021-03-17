@@ -28,14 +28,30 @@ const picker = new MultipleLevelPicker(config);
 | --- | --- | --- | --- |
 | prefix | String |  | 用於指定此選單內指定 id 屬性的前綴 |
 | limit  | Number | 1 | 限制選單可選取數量 |
-| source | String |  | 指定選單的資料來源 api，必填 |
+| source | String | null | 指定選單的資料來源 api，必填 |
 | selectLowest | Boolean | false | 設定是否僅能選擇最底層的選項 |
-| title | String |  | 設定選單標題文字 |
-| limitText | String |  | 設定已選擇顯示文字 |
-| rootTab | String | / | 設定最上層頁籤顯示文字 |
-| chosen | Object | {} | 設定預設已選項目|
+| lang | String | 1 | 指定 api 拉取資料語言 |
+| text | Object |  | 設定顯示文字，細節設定見 text 表格 |
+| chosen | Object | {} | 設定預設已選項目，格式範例見下|
 
-**chosen** 格式範例 
+## text 設定範例與內容
+```javascript
+const text = {
+  title: '產品選單',
+  submitBtn: '確認送出',
+  canelBtn: '取消',
+}
+```
+| 名稱 | 資料類型 | 預設值 | 欄位說明 |
+| --- | --- | --- | --- |
+| title | String | Menu | 選單標題 |
+| limit | String | Selected | 已選提示顯示 |
+| rootTab | String | All | 跟目錄頁籤文字 |
+| submitBtn | String | Submit | 送出按鈕文字 |
+| cancelBtn | String | Cancel | 取消按鈕文字 |
+
+
+## chosen 格式範例 
 ```javascript
 const obj ={
   '010300000000': '動物飼料',
