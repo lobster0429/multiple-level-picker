@@ -25,7 +25,7 @@ const picker = new MultipleLevelPicker(config);
 
 # 設定
 | 名稱 | 資料類型 | 預設值 | 功能說明 |
-| === | ======= | ===== | ======= |
+| --- | --- | --- | --- |
 | prefix | String |  | 用於指定此選單內指定 id 屬性的前綴 |
 | limit  | Number | 1 | 限制選單可選取數量 |
 | source | String |  | 指定選單的資料來源 api，必填 |
