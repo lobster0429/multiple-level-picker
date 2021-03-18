@@ -17,6 +17,7 @@ class MultipleLevelPicker {
     }
 
     this.config = $.extend({}, defaultConfig, config);
+    if (!this.config.source) return false;
 
     this.limit = this.config.limit;
     this.path = [];
@@ -24,14 +25,9 @@ class MultipleLevelPicker {
     this.callbacks = {
       submit: [],
       update: [],
+      cancel: [],
     }   
-
-    if (!this.config.source) return false;
-    this.get('000000000000')
-      .then(res => {
-        this.rootData = res;
-        this.init();
-      })
+    this.init();
   }
   
   init () {
@@ -43,16 +39,16 @@ class MultipleLevelPicker {
     this.$outer = $(`<div id="${this.config.prefix}-multiple-level-picker" class="multiple-level-picker" style="display: none;">`);
     this.$root = $(`<div class="mlp-entity">`); 
     $.each(this.basic, (p, fn) => fn());
-
-    this.$layers = [];
-    this.layer(this.rootData, this.config.text.rootTab, false, false);
     this.$root.appendTo(this.$outer);
     this.$outer.appendTo($('body'));
+
+    //sync data to chosen 
     Object.keys(this.config.chosen).forEach((k, i) => {
       if (i < this.limit) {
         this.chosen.add(k, this.config.chosen[k], this);
       }
-    })
+      this.chosen.merge();
+    });
   }
 
   bind() {
@@ -87,10 +83,14 @@ class MultipleLevelPicker {
       this.tabs();
     },
     submit: (evt) => {
+      this.chosen.merge();
+      this.hide();
       this.trigger('submit', this.chosen.data);
     },
     cancel: (evt) => {
+      this.chosen.restore(this);
       this.hide();
+      this.trigger('cancel');
     },
     change: (evt) => {
       evt.preventDefault();
@@ -118,31 +118,58 @@ class MultipleLevelPicker {
 
   chosen = {
     data: {},
+    temp: {},
+    merge: function () {
+      this.data = $.extend({}, this.temp);
+    },
+    restore: function (self) {
+      $.each(this.temp, k => {
+        this.remove(k, self);
+      });
+      $.each(this.data, (i, v) => {
+        this.add(i, v, self); 
+      });
+    },
     add: function(i, v, self) {
-      this.data[i] = v;
-      this.update(self, 'add', i, v);  
+      //validate parent and child
+      const k = i.toString(),
+            lv = k.indexOf('00')/2,
+            p = k.slice(0, i.indexOf('00'));
+
+      $.each(this.temp, (d, v) => {
+        const sk = d.slice(0, lv * 2);
+        if (sk == p) {
+          this.remove(d, self);
+        }
+      });
+      this.temp[k] = v;
+      this.view(self, 'add', k, v);  
     },
     remove: function(i, self) {
-      delete this.data[i];
-      this.update(self, 'remove', i);  
+      const k = i.toString();
+      delete this.temp[k];
+      this.view(self, 'remove', k);
     },
-    update: function (self, action, i, v) {
-      switch(action) {
+    view: function (self, action, i, v) {
+      switch (action) {
         case 'add':
           const $tag = $(`<div class="mlp-tag"><span>${v}</span><a class="mlp-delete" href="javascript:;" data-id="${i}"><i class="fa fa-times"></i></a></div>`);
           $tag.appendTo(self.$record);
+          self.$root.find(`[value="${i}"]`).prop('checked', true);
           break;
         case 'remove':
-          self.$record.find(`.mlp-delete[data-id="${i}"]`).parent('.mlp-tag').remove();
+          const keep = i.slice(0, i.indexOf('00'));
+          self.$container.find(`[value="${i}"]`).prop('checked', false);
+          self.$container.find(`[value^="${keep}"]`).prop('disabled', false);
+          self.$record.find(`[data-id="${i}"]`).parent('.mlp-tag').remove();
           break;
         default:
           return false;
-      }
-      const checked = (action == 'add');
+          break;
+      } 
       self.$root.find('.mlp-count').text(self.chosenLen());
-      self.$root.find(`[value="${i}"]`).prop('checked', checked);
       self.$record.scrollLeft(9999);
-      self.trigger('update', self.chosen.data);
+      self.trigger('update', self.chosen.temp);
     }
   }
   
@@ -189,9 +216,9 @@ class MultipleLevelPicker {
       const checkbox = (!this.config.selectLowest || !u.children);
       if (checkbox) {
         const dis = (disabled)?'disabled':'';
-        const chk = (this.chosen.data.hasOwnProperty(u.code) && !dis)?'checked':'';
+        const chk = (this.chosen.temp.hasOwnProperty(u.code) && !dis)?'checked':'';
         const $checkbox = $(`<input type="checkbox" value="${u.code}" data-name="${u.name}" ${chk} ${dis} class="mlp-checkbox g-hidden-xs-up"><span class="mlp-fcheck u-check-icon-checkbox-v4"><i class="fa" data-check-icon="&#xf00c"></i></span>`);
-        $checkbox.appendTo($label);
+        $checkbox.prependTo($label);
       }
 
       if (u.children) {
@@ -246,7 +273,7 @@ class MultipleLevelPicker {
   } 
 
   chosenLen() {
-    return Object.keys(this.chosen.data).length;
+    return Object.keys(this.chosen.temp).length;
   }
 
   get(code) {
@@ -271,18 +298,22 @@ class MultipleLevelPicker {
 
   show () {
     if(this.$outer) this.$outer.show().addClass('__active');;    
+    this.get('000000000000')
+      .then(res => {
+        this.layer(res, this.config.text.rootTab, false, false);
+      });
   }
   hide () {
     this.$outer.hide().removeClass('__active');    
+    this.$container.html('');
+    this.path = [];
   }
   
   on (a, cb) {
-    
     if (this.callbacks.hasOwnProperty(a) && typeof cb == 'function') {
       this.callbacks[a].push(cb);
     }
   }
-
   trigger(a, args) {
     if (this.callbacks.hasOwnProperty(a)) {
       this.callbacks[a].forEach(fn => {

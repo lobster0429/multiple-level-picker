@@ -146,45 +146,34 @@
   background: #F2F2F2; }
 
 .multiple-level-picker .mlp-label {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
   position: relative;
   line-height: 1.3;
   margin: 0;
-  padding: .5em 0;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
+  padding: .5em 1em .5em 25px;
   -webkit-box-flex: 0;
-  -ms-flex: 0 0 calc(100% - 30px);
-  flex: 0 0 calc(100% - 30px); }
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto; }
 
 .multiple-level-picker .mlp-forward {
   display: block;
   border: none;
   background: none;
-  -webkit-box-flex: 0;
-  -ms-flex: 0 0 30px;
-  flex: 0 0 30px;
+  -webkit-box-flex: 1;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  text-align: right;
   outline: none !important; }
 
 .multiple-level-picker .mlp-checkbox + .mlp-fcheck {
   background: #FFF; }
 
-.multiple-level-picker .mlp-checkbox:checked + .mlp-fcheck {
-  color: #FFF !important;
-  background: #1EA555; }
-
 .multiple-level-picker .mlp-checkbox[disabled] + .mlp-fcheck {
   background: #F2F2F2; }
 
 .multiple-level-picker .mlp-fcheck {
-  display: inline-block;
-  position: relative;
-  vertical-align: middle;
-  margin-left: .5em;
-  border-radius: 50% 50%; }
+  position: absolute;
+  display: block;
+  left: 0; }
 
 .multiple-level-picker .mlp-record {
   border-top: 1px solid #DDD;
