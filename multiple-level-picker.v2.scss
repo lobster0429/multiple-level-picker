@@ -188,12 +188,11 @@
 
 @media only screen and (max-width: 550px){
   .multiple-level-picker {
-    & {
-      height: 480px; 
-      display: flex;
-      flex-direction: column;
-    }
     .mlp- {
+      &entity {
+        display: flex;
+        flex-direction: column;
+      }
       &record {
         display: flex;
         overflow-x: auto;
