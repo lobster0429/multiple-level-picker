@@ -190,12 +190,25 @@
   .multiple-level-picker {
     .mlp- {
       &entity {
+        border: none;
+        max-width: unset;
+        flex: 1 1 100%;
+        height: 100%;
         display: flex;
         flex-direction: column;
+        justify-content: space-around;
+      }
+      &container {
+        height: unset;
+        flex: 1 1 calc(100vh - 180px);
       }
       &record {
         display: flex;
         overflow-x: auto;
+      }
+      &label {
+        padding-top: .8em;
+        padding-bottom: .8em;
       }
       &tag {
         flex: 0 0 auto;
