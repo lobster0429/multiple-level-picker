@@ -73,7 +73,7 @@ picker.on('submit', (res) => {console.log(res)});
 | submit | 當按下送出按鍵時 | 當前選擇的資料 |
 | cancel | 當按下取消按鍵時 | 本來已選擇的資料 |
 
-#Methods
+# Methods
 使用範例
 ```javascript
 picker.remove(`${id}`);
