@@ -90,7 +90,7 @@ class MultipleLevelPicker {
     cancel: (evt) => {
       this.chosen.restore(this);
       this.hide();
-      this.trigger('cancel');
+      this.trigger('cancel', this.chosen.data);
     },
     change: (evt) => {
       evt.preventDefault();
@@ -295,7 +295,13 @@ class MultipleLevelPicker {
         });
     })
   }
-
+  
+  add (i, v) {
+    this.chosen.add(i, v, this);
+  }
+  remove (i) {
+    this.chosen.remove(i, this);  
+  }
   show () {
     if(this.$outer) this.$outer.show().addClass('__active');;    
     this.get('000000000000')
