@@ -60,7 +60,7 @@ const obj ={
 };
 ```
 
-# 回傳 
+# Callbacks 
 此套件目前提供以下回傳，使用範例與回傳時機說明如下：
 
 ```javascript
@@ -71,6 +71,20 @@ picker.on('submit', (res) => {console.log(res)});
 | --- | --- | --- |
 | update | 當資料異動時 | 當前選擇的資料 |
 | submit | 當按下送出按鍵時 | 當前選擇的資料 |
+| cancel | 當按下取消按鍵時 | 本來已選擇的資料 |
+
+#Methods
+使用範例
+```javascript
+picker.remove(`${id}`);
+```
+
+| 名稱 | 作用 | 參數 |
+| --- | --- | --- |
+| show() | 顯示選單 | |
+| hide() | 隱藏選單 | |
+| add(i, v) | 增加資料 | i: 增加資料的id<br/>v: 增加資料的文字名稱 |
+| remove(i) | 刪除資料 | i: 增加資料的id |
 
 
 
