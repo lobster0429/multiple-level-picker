@@ -146,8 +146,10 @@
     &checkbox + .mlp-fcheck {
       background: #FFF;
     }
-    &checkbox[disabled] + .mlp-fcheck{
+    &checkbox[disabled]:checked + .mlp-fcheck{
       background: #F2F2F2; 
+      color: #ccc !important;
+      border-color: #DDD !important;
     }
     &fcheck {
       position: absolute;
