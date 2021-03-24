@@ -30,6 +30,7 @@ const picker = new MultipleLevelPicker(config);
 | limit  | Number | 1 | 限制選單可選取數量 |
 | source | String | null | 指定選單的資料來源 api，必填 |
 | selectLowest | Boolean | false | 設定是否僅能選擇最底層的選項 |
+| acceptLevel | Number | 99 | 設定顯示層級 |
 | lang | String | 1 | 指定 api 拉取資料語言 |
 | text | Object |  | 設定顯示文字，細節設定見 text 表格 |
 | chosen | Object | {} | 設定預設已選項目，格式範例見下|
