@@ -7,7 +7,6 @@
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 999;
 }
 .multiple-level-picker ul, .multiple-level-picker li {
   list-style: none;

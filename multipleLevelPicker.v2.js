@@ -8,6 +8,7 @@ class MultipleLevelPicker {
       acceptLevel: 99,
       lang: '1',
       chosen: {},
+      zIndex: '99999',
       text: {
         title: 'Menu',
         count: 'Selected：',
@@ -37,7 +38,7 @@ class MultipleLevelPicker {
   }
  
   render() {
-    this.$outer = $(`<div id="${this.config.prefix}-multiple-level-picker" class="multiple-level-picker" style="display: none;">`);
+    this.$outer = $(`<div id="${this.config.prefix}-multiple-level-picker" class="multiple-level-picker" style="display: none; z-index: ${this.config.zIndex};">`);
     this.$root = $(`<div class="mlp-entity">`); 
     $.each(this.basic, (p, fn) => fn());
     this.$root.appendTo(this.$outer);
@@ -59,6 +60,8 @@ class MultipleLevelPicker {
     this.$root.on('click', '.mlp-cancel', this.events.cancel.bind(this));
     this.$root.on('change', '.mlp-checkbox', this.events.change.bind(this));
     this.$root.on('click', '.mlp-delete', this.events.delete.bind(this));
+    this.$root.on('click', evt => {evt.stopPropagation();});
+    this.$outer.on('click', this.events.cancel.bind(this));
   }
 
   events = {
@@ -84,11 +87,13 @@ class MultipleLevelPicker {
       this.tabs();
     },
     submit: (evt) => {
+      evt.preventDefault();
       this.chosen.merge();
       this.hide();
       this.trigger('submit', this.chosen.data);
     },
     cancel: (evt) => {
+      evt.preventDefault();
       this.chosen.restore(this);
       this.hide();
       this.trigger('cancel', this.chosen.data);
