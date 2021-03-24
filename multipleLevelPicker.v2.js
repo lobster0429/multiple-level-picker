@@ -8,7 +8,7 @@ class MultipleLevelPicker {
       acceptLevel: 99,
       lang: '1',
       chosen: {},
-      zIndex: '99999',
+      zIndex: 99999,
       text: {
         title: 'Menu',
         count: 'Selected：',

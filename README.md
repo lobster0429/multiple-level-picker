@@ -34,6 +34,7 @@ const picker = new MultipleLevelPicker(config);
 | lang | String | 1 | 指定 api 拉取資料語言 |
 | text | Object |  | 設定顯示文字，細節設定見 text 表格 |
 | chosen | Object | {} | 設定預設已選項目，格式範例見下|
+| zIndex  | Number | 99999 | 設定選單z-index層級 |
 
 ### text 設定範例與內容
 ```javascript
