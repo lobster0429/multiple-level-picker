@@ -161,7 +161,7 @@ class MultipleLevelPicker {
         case 'remove':
           const keep = i.slice(0, i.indexOf('00'));
           self.$container.find(`[value="${i}"]`).prop('checked', false);
-          self.$container.find(`[value^="${keep}"]`).prop('disabled', false);
+          self.$container.find(`[value^="${keep}"]`).prop('disabled', false).prop('checked', false);
           self.$record.find(`[data-id="${i}"]`).parent('.mlp-tag').remove();
           break;
         default:
@@ -216,7 +216,7 @@ class MultipleLevelPicker {
 
       const checkbox = (!this.config.selectLowest || !u.children);
       if (checkbox) {
-        const dis = (disabled)?'disabled':'';
+        const dis = (disabled)?'disabled checked':'';
         const chk = (this.chosen.temp.hasOwnProperty(u.code) && !dis)?'checked':'';
         const $checkbox = $(`<input type="checkbox" value="${u.code}" data-name="${u.name}" ${chk} ${dis} class="mlp-checkbox g-hidden-xs-up"><span class="mlp-fcheck u-check-icon-checkbox-v4"><i class="fa" data-check-icon="&#xf00c"></i></span>`);
         $checkbox.prependTo($label);

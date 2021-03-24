@@ -1,5 +1,7 @@
 .DS_Store
 README.html
 *.swp
+*.swo
+*.txt
 *.config
 *.xlsx

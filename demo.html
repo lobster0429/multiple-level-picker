@@ -87,9 +87,10 @@
 
   <div id="data-output"></div>
   <script>
+   
   $(document).on('ready', () => {
     const config = {
-      prefix: 'industries',
+      prefix: 'service',
       limit: 5,
       source: 'http://test.iwowpao.com/api/industryclass.php',
       //selectLowest: true,
@@ -97,8 +98,8 @@
       lang: '1',
       text: {
         count: '已選擇：',
-        title: '產品類型選單',
-        rootTab: '全部產品',
+        title: '服務類型選單',
+        rootTab: '全部服務',
         cancelBtn: '取消',
         submitBtn : '確認送出'
       },
@@ -108,10 +109,10 @@
         '010101000000': '農用溫室',
         '010102020000': '其他水產養殖設備',
       },
-      */
+     */
     }
     window.pickerv2 = new MultipleLevelPicker(config);
-    
+
     $('#show').on('click', evt => {
       pickerv2.show();
     })
@@ -122,11 +123,18 @@
         ids.push(i);
         texts.push(r); 
       });
+
       $('#display').html('');
-      texts.forEach(t => {
-        const $label = $(`<div class="product-label" style="display: inline-block; border: 1px solid #CCC; padding: .1em .8em; border-radius: 1.5em; margin-right: .3em;">${t}</div>`)
+      texts.forEach((t, i) => {
+        const $label = $(`<div class="product-label" style="display: inline-block; border: 1px solid #CCC; padding: .1em .8em; border-radius: 1.5em; margin-right: .3em;">${t}<a href="javascript:;" data-id="${ids[i]}" style="margin-left: .5em;"><i class="fa fa-times"></i></a></div>`)
         $label.appendTo($('#display'));
       })
+          $(document).on('click', '.product-label a', evt => {
+            const $this = evt.currentTarget;      
+            const id = $this.dataset.id;
+            $($this).parent('.product-label').remove();
+            pickerv2.remove(id);
+          })
       $('[name="products"]').val(ids.join(', '));
     });
 
