@@ -5,6 +5,7 @@ class MultipleLevelPicker {
       limit: 1,
       source: null,
       selectLowest: false,
+      acceptLevel: 99,
       lang: '1',
       chosen: {},
       text: {
@@ -221,7 +222,7 @@ class MultipleLevelPicker {
         $checkbox.prependTo($label);
       }
 
-      if (u.children) {
+      if (data.level < this.config.acceptLevel & u.children) {
         const $forward = $(`<button class="mlp-forward" data-from="${u.name}" data-forward="${u.code}"><i class="fa fa-angle-right"></i></button>`);
         $forward.appendTo($itm);
       }
