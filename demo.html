@@ -118,6 +118,7 @@
       pickerv2.show();
     })
 
+    //當選單按下送出時觸發回傳的程式碼
     pickerv2.on('submit', res => {
       const texts = [], ids = [];
       $.each(res, (i, r) => {
@@ -126,22 +127,40 @@
       });
 
       $('#display').html('');
+      //產生頁面上的選項
       texts.forEach((t, i) => {
         const $label = $(`<div class="product-label" style="display: inline-block; border: 1px solid #CCC; padding: .1em .8em; border-radius: 1.5em; margin-right: .3em;">${t}<a href="javascript:;" data-id="${ids[i]}" style="margin-left: .5em;"><i class="fa fa-times"></i></a></div>`)
         $label.appendTo($('#display'));
       })
-          $(document).on('click', '.product-label a', evt => {
-            const $this = evt.currentTarget;      
-            const id = $this.dataset.id;
-            $($this).parent('.product-label').remove();
-            pickerv2.remove(id);
-          })
+      //將選單傳出的值寫入名為 products 的隱藏 input
       $('[name="products"]').val(ids.join(', '));
     });
 
+    //當畫面選項按下刪除時進行的處理
+    $(document).on('click', '.product-label a', evt => {
+      const $this = evt.currentTarget;      
+      const id = $this.dataset.id;
+      let val = $('[name="products"]').val().split(', ');
+
+      //把自己刪除
+      $($this).parent('.product-label').remove();
+
+      //將選單中對應的 id 取消選取
+      pickerv2.remove(id);
+
+      //將隱藏input 的值修改後塞回
+      console.log(val);
+      val.splice(val.indexOf(id), 1);
+      $('[name="products"]').val(val.join(', '));
+    })
+
+
+    //當選單選項更新時觸發回傳的程式碼
     pickerv2.on('update', res => {
       console.log(res);
     });
+
+    //當選單按下取消時觸發回傳的程式碼
     pickerv2.on('cancel', res => {
       console.log(res);
     });
